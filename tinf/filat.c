@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define S_IFSOCK __S_IFSOCK
+
 int lstat(const char *__file, struct stat *__buf);
 
 int main(int argc, char *argv[])
@@ -36,6 +38,8 @@ int main(int argc, char *argv[])
         printf("FIFO (named pipe)");
     else if(S_ISLNK(sb.st_mode))
         printf("Symbolic link");
+    else if(S_IFSOCK & sb.st_mode)
+        printf("Socket");
 
     printf("\n   Access Privileges:        ");
 
